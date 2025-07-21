@@ -1,0 +1,67 @@
+files:
+  - README.md: Plugin documentation and usage instructions
+  - lua/marko/config.lua: Manage configuration defaults and highlight groups
+  - lua/marko/icons.lua: Provide icons and format mark display lines
+  - lua/marko/init.lua: Entry module to setup plugin and toggles
+  - lua/marko/marks.lua: Retrieve, sort, and handle marks operations
+  - lua/marko/popup.lua: Build and control the marks popup window
+  - lua/marko/syntax.lua: Define syntax rules for popup buffer
+  - lua/marko/virtual.lua: Display virtual text marks with timer refresh
+  - plugin/marko.lua: Register Marko command and keymap
+functions:
+  lua/marko/init.lua:
+    - function M.setup(opts): merge options, set highlights, keymaps, autocommands
+    - function M.toggle_marks(): open or close marks popup
+    - function M.show_marks(): create marks popup
+    - function M.debug_marks(): print current marks debug info
+    - function M.refresh_highlights(): reapply highlight groups
+    - function M.toggle_virtual_marks(): toggle virtual mark display
+    - function M.refresh_virtual_marks(): refresh virtual marks in buffer
+  lua/marko/config.lua:
+    - function setup_highlights(): define highlight groups from config
+    - function M.setup(opts): merge config and initialize highlights
+    - function M.get(): return current config table
+    - function M.get_namespace(): return extmark namespace id
+    - function M.refresh_highlights(): refresh highlight definitions
+  lua/marko/icons.lua:
+    - function M.get_file_icon(filename): return icon for file extension
+    - function M.get_mark_icon(mark_type): choose icon based on mark scope
+    - function M.format_mark_line(mark, config): format a mark line for popup
+  lua/marko/marks.lua:
+    - function M.get_buffer_marks(): list marks from current buffer
+    - function M.get_all_buffer_marks(): collect buffer marks from all buffers
+    - function M.get_global_marks(): fetch global marks with text preview
+    - function M.deduplicate_marks(marks): remove duplicates preferring buffer marks
+    - function M.debug_marks(): print debug info about marks
+    - function M.get_all_marks(): gather buffer and global marks sorted
+    - function M.delete_mark(mark_info): delete mark from buffer or global list
+    - function M.goto_mark(mark_info): jump to mark location and file
+  lua/marko/popup.lua:
+    - function M.is_open(): return whether popup window exists
+    - function create_shadow(width, height, row, col): create optional shadow window
+    - function M.create_popup(): open popup and populate with marks
+    - function generate_header(marks): build header lines with counts
+    - function generate_column_headers(): produce column header lines
+    - function generate_status_bar(): create footer with key hints
+    - function M.populate_buffer(marks): fill buffer with mark lines and status
+    - function M.apply_highlighting(marks, marks_start_line): set extmark highlights
+    - function M.setup_keymaps(): map popup navigation and actions
+    - function M.close_popup(): close popup and shadow windows
+  lua/marko/syntax.lua:
+    - function M.setup_syntax(): define syntax and highlight links for popup
+    - function M.setup_filetype(): apply syntax when filetype detected
+  lua/marko/virtual.lua:
+    - function M.setup(opts): configure virtual text settings
+    - function get_mark_highlight(mark): choose highlight group by mark case
+    - function show_mark_internal(bufnr, mark, line, col): place virtual text mark
+    - function M.show_mark(bufnr, mark, line, col): refresh buffer marks
+    - function M.hide_mark(bufnr, mark): clear virtual marks in buffer
+    - function M.hide_all_marks(bufnr): remove all virtual marks
+    - function M.refresh_buffer_marks(bufnr): refresh marks for buffer
+    - function M.toggle(): enable or disable virtual marks globally
+    - function M.cleanup(): stop timer and clear all marks
+    - function M.start_timer(): begin periodic refresh timer
+    - function M.stop_timer(): halt refresh timer
+    - function M.setup_autocmds(): establish autocommands and start timer
+classes: {}
+tests: {}
