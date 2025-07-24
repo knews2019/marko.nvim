@@ -7,7 +7,7 @@ A modern Neovim plugin for enhanced mark management with a beautiful popup inter
 - 🎨 **Beautiful popup interface** - Clean, modern UI for browsing marks
 - 🎯 **Mark types support** - Buffer marks (a-z) and global marks (A-Z)
 - 📝 **Line preview** - See the actual content at each mark
-- ⚡ **Fast navigation** - Jump to marks with Enter or click
+- ⚡ **Fast navigation** - Jump to marks with Enter, click, or by pressing the mark letter
 - 🗑️ **Easy deletion** - Delete marks with 'd' key
 - 👻 **Virtual text** - See mark indicators directly in your code
 - 🎛️ **Configurable** - Customize appearance and keybindings
@@ -66,6 +66,7 @@ Plug 'developedbyed/marko.nvim'
 
 3. **Navigate in the popup**:
    - `Enter` - Jump to mark
+   - Press mark letter - Jump to that mark
    - `d` - Delete mark
    - `q` or `Esc` - Close popup
 

@@ -455,6 +455,28 @@ function M.setup_keymaps()
     vim.cmd("normal! k")
     constrain_cursor()
   end, { buffer = popup_buf, silent = true })
+
+  -- Jump to a mark directly when its letter is pressed
+  local marks_data = vim.b[popup_buf].marks_data or {}
+  local reserved = {
+    [config.keymaps.delete] = true,
+    [config.keymaps.goto] = true,
+    [config.keymaps.close] = true,
+  }
+  if config.default_keymap then
+    reserved[config.default_keymap] = true
+  end
+
+  for _, mark in ipairs(marks_data) do
+    local letter = mark.mark
+    if not reserved[letter] then
+      local mark_data = mark
+      vim.keymap.set("n", letter, function()
+        M.close_popup()
+        marks_module.goto_mark(mark_data)
+      end, { buffer = popup_buf, silent = true })
+    end
+  end
 end
 
 -- Close the popup
